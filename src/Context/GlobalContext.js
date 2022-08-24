@@ -106,7 +106,7 @@ export default function GlobalContextProvider({ children }) {
             }, 4000);
         }
         setIsLoading(false);
-    }, [centers]);
+    }, [centers , moveCenters , clustering]);
 
     return (
         <GlobalContext.Provider value={{ circles, centers, RADIUS, helperText, isLoading }}>

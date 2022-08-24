@@ -105,7 +105,7 @@ export default function GlobalContextProvider({ children }) {
                 moveCenters()
             }, 4000);
         }
-    }, [centers, moveCenters, clustering]);
+    }, [centers, moveCenters, clustering , isDone]);
 
     return (
         <GlobalContext.Provider value={{ circles, centers, RADIUS, helperText }}>

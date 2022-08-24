@@ -1,0 +1,21 @@
+.helperText {
+    position: absolute;
+    left: 50%;
+    bottom: 25px;
+    transform: translateX(-50%);
+    border-radius: 7px;
+    padding: 15px;
+    width: fit-content;
+    max-width: 95%;
+    background: #222;
+    color: #CCC;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+@media screen and (max-width:720px) {
+    .helperText {
+        width: 90%;
+        font-size: 14px;
+    }
+}

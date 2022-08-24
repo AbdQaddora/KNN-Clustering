@@ -12,7 +12,7 @@ export default function GlobalContextProvider({ children }) {
 
     const [centers, setCenters] = useState(null);
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isDone, setIsDone] = useState(false);
     const [roundNumber, setRoundNumber] = useState(0);
     const [helperText, setHelperText] = useState(`Round ${roundNumber}`);
 
@@ -88,28 +88,27 @@ export default function GlobalContextProvider({ children }) {
             setCenters(newCenters);
             setHelperText(`move the  ${CLUSTERS_COLORS.length} CENTERS`)
         } else {
+            setIsDone(true);
             setHelperText(`clustering process done in ${roundNumber} round 🔥`)
         }
     }, [centers, circles, roundNumber])
 
     useEffect(() => {
-        setIsLoading(true);
         // pick the new centers
-        if (centers !== null) {
+        if (centers !== null && !isDone) {
             // clustering process 
             setTimeout(() => {
-                clustering()
+                clustering();
             }, 2000);
 
             setTimeout(() => {
                 moveCenters()
             }, 4000);
         }
-        setIsLoading(false);
     }, [centers, moveCenters, clustering]);
 
     return (
-        <GlobalContext.Provider value={{ circles, centers, RADIUS, helperText, isLoading }}>
+        <GlobalContext.Provider value={{ circles, centers, RADIUS, helperText }}>
             {children}
         </GlobalContext.Provider>
     )

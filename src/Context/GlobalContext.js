@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext, useEffect, useRef } from 'react'
+import React, { useState, useContext, createContext, useEffect, useRef, useCallback } from 'react'
 const GlobalContext = createContext();
 const RADIUS = 25;
 const CLUSTERS_COLORS = ['#f00', '#0f0', '#00f'];
@@ -28,7 +28,7 @@ export default function GlobalContextProvider({ children }) {
         firstTimePickCenters.current = false;
     }, []);
 
-    const clustering = () => {
+    const clustering = useCallback(() => {
         const newCircles = circles;
         for (let i = 0; i < newCircles.length; i++) {
             const circle = newCircles[i];
@@ -45,9 +45,9 @@ export default function GlobalContextProvider({ children }) {
         }
         setCircles(newCircles);
         setHelperText(`Place the circles in the nearest cluster`)
-    }
+    }, [circles, centers])
 
-    const moveCenters = () => {
+    const moveCenters = useCallback(() => {
         setRoundNumber(prev => prev + 1);
         const newCenters = [];
         for (let i = 0; i < centers.length; i++) {
@@ -90,7 +90,7 @@ export default function GlobalContextProvider({ children }) {
         } else {
             setHelperText(`clustering process done in ${roundNumber} round 🔥`)
         }
-    }
+    }, [centers, circles])
 
     useEffect(() => {
         setIsLoading(true);
@@ -106,7 +106,7 @@ export default function GlobalContextProvider({ children }) {
             }, 4000);
         }
         setIsLoading(false);
-    }, [centers , moveCenters , clustering]);
+    }, [centers, moveCenters, clustering]);
 
     return (
         <GlobalContext.Provider value={{ circles, centers, RADIUS, helperText, isLoading }}>

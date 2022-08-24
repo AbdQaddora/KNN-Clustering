@@ -89,7 +89,7 @@ export default function GlobalContextProvider({ children }) {
             setHelperText(`move the  ${CLUSTERS_COLORS.length} CENTERS`)
         } else {
             setIsDone(true);
-            setHelperText(`clustering process done in ${roundNumber} round 🔥`)
+            setHelperText(`clustering process done in ${roundNumber} rounds 🔥`)
         }
     }, [centers, circles, roundNumber])
 

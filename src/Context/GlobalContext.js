@@ -90,7 +90,7 @@ export default function GlobalContextProvider({ children }) {
         } else {
             setHelperText(`clustering process done in ${roundNumber} round 🔥`)
         }
-    }, [centers, circles])
+    }, [centers, circles, roundNumber])
 
     useEffect(() => {
         setIsLoading(true);
